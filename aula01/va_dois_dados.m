@@ -1,6 +1,6 @@
 clear all; close all; clc;
 
-N = 10; % Numero de realizações
+N = 10000; % Numero de realizações
 
 D1 = randi([1 6], 1, N);  % ; omite a saida
 D2 = randi([1 6], 1, N);
@@ -13,15 +13,19 @@ X = D1 + D2;
 x = 2 : 12;
 
 pmfX_teorica = [1 2 3 4 5 6 5 4 3 2 1]/36;
+% estimativa da real probabilidade que está entre 0 e 1
+pmfX_sim = hist(X,x) / N;
 
 % figure;
 % plot(x, pmfX_teorica)
 
 figure; hold on; grid on;
-stem(x, pmfX_teorica)
+bar(x, pmfX_sim, 'y');
+stem(x, pmfX_teorica, 'b', 'LineWidth', 3);
 xlabel('x'); ylabel('p_X(x)');
 
-% aula que vem
-pmfX_sim = 0;
+Pr_primo_teo = 15/36
+% funcao que calcula a media
+Pr_primo_sim = mean((X == 2) | (X==3)| (X==5) | (X==7) | (X==11))
 
 % format compact
