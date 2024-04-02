@@ -26,7 +26,7 @@ X(idx2) = 5;
 X(idx3) = 0;
 X(idx4) = unifrnd(0,20,1,sum(idx4));
 
-dx= 1/5; x=0:dx:20;
+dx= 1/5; x=-5:dx:25;
 
 % PDF
 pdfX_sim = (hist(X,x) / (N*dx));
@@ -37,7 +37,8 @@ cdfX_sim = cumsum(pdfX_sim)*dx;
 cdfX_teo = 0            .* (x < 0) + ...
             (1/6 + x/60) .* (0 <= x & x < 5) + ...
             (35/60 + ((x-5)/60)) .* (5 <= x & x < 10) + ...
-            (50/60  + ((x-10)/60)) .* (10 <= x && x < 20);
+            (50/60  + ((x-10)/60)) .* (10 <= x & x < 20) + ...
+            (1) .* (x >= 20);
 
 figure;
 subplot(2,1,1); hold on; grid on;
@@ -51,11 +52,11 @@ plot([5, 5], [0, 1/3], 'b', 'LineWidth', 3');
 plot([5], [1/3], 'b^', 'MarkerSize', 12, 'MarkerFaceColor', 'b');
 plot([0, 0], [0, 1/6], 'b', 'LineWidth', 3');
 plot([0], [1/6], 'b^', 'MarkerSize', 12, 'MarkerFaceColor', 'b');
-xlim([0 20]); ylim([0 1/3]);
+xlim([-5 25]); ylim([0 1/3]);
 xlabel('X'); ylabel('f_X(x)');
 
 subplot(2,1,2); hold on; grid on;
 plot(x, cdfX_sim, 'r', 'LineWidth', 4);
-plot(x,cdfX_teo, 'b--', 'LineWidth', 2)
-xlim([0 20]); ylim([50/60,1/6]);
+plot(x, cdfX_teo, 'b--', 'LineWidth', 2);
+xlim([-5 25]); ylim([-0.2 1.2]);
 xlabel('X'); ylabel('F_X(x)');
