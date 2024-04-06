@@ -3,7 +3,7 @@
 clear all; close all; clc;
 pkg load statistics;
 
-% A) esboço da PDF
+% a) Representação da PDF
 
 % número de realizações
 N = 100000;
@@ -32,14 +32,6 @@ dx= 1/5; x=-5:dx:25;
 pdfX_sim = (hist(X,x) / (N*dx));
 pdfX_teo = (1/60) .* (0 < x & x < 20); % sem os impulsos
 
-% CDF
-cdfX_sim = cumsum(pdfX_sim)*dx;
-cdfX_teo = 0            .* (x < 0) + ...
-            (1/6 + x/60) .* (0 <= x & x < 5) + ...
-            (35/60 + ((x-5)/60)) .* (5 <= x & x < 10) + ...
-            (50/60  + ((x-10)/60)) .* (10 <= x & x < 20) + ...
-            (1) .* (x >= 20);
-
 figure;
 subplot(2,1,1); hold on; grid on;
 bar(x,pdfX_sim, 'y');
@@ -55,8 +47,25 @@ plot([0], [1/6], 'b^', 'MarkerSize', 12, 'MarkerFaceColor', 'b');
 xlim([-5 25]); ylim([0 1/3]);
 xlabel('X'); ylabel('f_X(x)');
 
+%  b) Representação da CDF
+cdfX_sim = cumsum(pdfX_sim)*dx;
+cdfX_teo = 0            .* (x < 0) + ...
+            (1/6 + x/60) .* (0 <= x & x < 5) + ...
+            (35/60 + ((x-5)/60)) .* (5 <= x & x < 10) + ...
+            (50/60  + ((x-10)/60)) .* (10 <= x & x < 20) + ...
+            (1) .* (x >= 20);
+
+
 subplot(2,1,2); hold on; grid on;
 plot(x, cdfX_sim, 'r', 'LineWidth', 4);
 plot(x, cdfX_teo, 'b--', 'LineWidth', 2);
 xlim([-5 25]); ylim([-0.2 1.2]);
 xlabel('X'); ylabel('F_X(x)');
+
+% c) Determine a média de X
+printf('Média simulada E[X] = %g \n', mean(X))
+% printf('Média calculada/teórica E[X] = %g \n', )
+
+% d) Determine Pr[X>5]
+printf('Pr[X > 5] simulada = %g \n', mean(X > 5))
+% printf('Pr[X > 5] simulada = %g \n', )
