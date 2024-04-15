@@ -38,11 +38,11 @@ bar(x,pdfX_sim, 'y');
 plot(x, pdfX_teo, 'b', 'LineWidth',4);
 
 %  representando os impulsos
-plot([10, 10], [0, 1/6], 'b', 'LineWidth', 3');
+plot([10, 10], [0, 1/6], 'b', 'LineWidth', 3);
 plot([10], [1/6], 'b^', 'MarkerSize', 12, 'MarkerFaceColor', 'b');
-plot([5, 5], [0, 1/3], 'b', 'LineWidth', 3');
+plot([5, 5], [0, 1/3], 'b', 'LineWidth', 3);
 plot([5], [1/3], 'b^', 'MarkerSize', 12, 'MarkerFaceColor', 'b');
-plot([0, 0], [0, 1/6], 'b', 'LineWidth', 3');
+plot([0, 0], [0, 1/6], 'b', 'LineWidth', 3);
 plot([0], [1/6], 'b^', 'MarkerSize', 12, 'MarkerFaceColor', 'b');
 xlim([-5 25]); ylim([0 1/3]);
 xlabel('X'); ylabel('f_X(x)');
@@ -64,8 +64,8 @@ xlabel('X'); ylabel('F_X(x)');
 
 % c) Determine a média de X
 printf('Média simulada E[X] = %g \n', mean(X))
-% printf('Média calculada/teórica E[X] = %g \n', )
+printf('Média calculada/teórica E[X] = %g \n', 20/3)
 
 % d) Determine Pr[X>5]
 printf('Pr[X > 5] simulada = %g \n', mean(X > 5))
-% printf('Pr[X > 5] simulada = %g \n', )
+printf('Pr[X > 5] simulada = %g \n', 45/60)
